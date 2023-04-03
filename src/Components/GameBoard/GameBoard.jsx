@@ -20,6 +20,18 @@ const GameBoard = () => {
 
     const [board, setBoard] = useState(createEmptyBoard());
 
+    
+    const handleCellClick = (e) => {
+        const { row, col} = e.target.dataset;
+
+        if (board[row][col] !== null) return;
+        
+        const newBoard = JSON.parse(JSON.stringify(board));
+        newBoard[row][col] = 'X';
+
+        setBoard(newBoard);
+    };
+
     const createRowJSX = (row, rowIndex) => {
         const cells = [];
 
@@ -30,11 +42,21 @@ const GameBoard = () => {
                 style += " empty-cell"
             }
 
-            cells.push(<td className={style}>{row}</td>)
+            cells.push(
+                <td 
+                    className={style} 
+                    key={JSON.stringify({row, rowIndex, i})}
+                    onClick={handleCellClick}
+                    data-row={rowIndex}
+                    data-col={i}
+                >
+                    {row[i]}
+                </td>
+            )
         };
 
         return (
-             <tr>
+             <tr key={JSON.stringify({row, rowIndex})}>
                 {cells}
             </tr>
         )
@@ -56,10 +78,14 @@ const GameBoard = () => {
         )
     };
 
+    const resetGame = () => {
+        setBoard(createEmptyBoard());
+    };
 
     return (
         <>
             <h2>GameBoard</h2>
+            <button onClick={resetGame}>New Game</button>
             {createBoardJSX()}
         </>
     )
