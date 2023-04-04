@@ -1,8 +1,10 @@
-const Menu = () => {
+import './Menu.css';
+
+const Menu = ({resetGame}) => {
 
     return (
         <div>
-            Menu
+            <button onClick={resetGame} className='button'>New Game</button>
         </div>
     )
 };

@@ -1,3 +1,10 @@
+h1 {
+    margin-top: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgb(65, 65, 65);
+    letter-spacing: 1.5px;
+}
+
 .board {
     border-collapse: collapse;
 }
