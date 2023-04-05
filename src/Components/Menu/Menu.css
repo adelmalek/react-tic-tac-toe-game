@@ -3,6 +3,7 @@
   border: 0;
   border-radius: 56px;
   color: #fff;
+  text-shadow: 2px 2px 4px rgb(65, 65, 65);
   cursor: pointer;
   display: inline-block;
   font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;

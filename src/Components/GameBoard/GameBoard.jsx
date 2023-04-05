@@ -25,21 +25,21 @@ const GameBoard = () => {
     };
 
     const [board, setBoard] = useState(createEmptyBoard());
-    const [symbol, setSymbol] = useState('X');
+    const [symbol, setSymbol] = useState("🦄");
     const [winner, setWinner] = useState(null);
 
     
     const handleCellClick = (e) => {
         const { row, col} = e.target.dataset;
 
-        if (board[row][col] !== null) return;
+        if (board[row][col] !== null || winner !== null) return;
         
         const newBoard = JSON.parse(JSON.stringify(board));
         newBoard[row][col] = symbol;
 
         setWinner(getDiagonalList(newBoard));
         setBoard(newBoard);
-        setSymbol(symbol === 'X'? 'O' : 'X');
+        setSymbol(symbol === "🦄" ? "🐲 " : "🦄");
     };
 
     const createRowJSX = (row, rowIndex) => {
@@ -48,7 +48,7 @@ const GameBoard = () => {
         for (let i = 0; i < board.length; i += 1) {
             let style = "cell";
 
-            if (row[i] === null) {
+            if (row[i] === null && winner === null) {
                 style += " empty-cell"
             }
 
@@ -90,6 +90,8 @@ const GameBoard = () => {
 
     const resetGame = () => {
         setBoard(createEmptyBoard());
+        setSymbol('🦄');
+        setWinner(null);
     };
 
     const getWinnerInRow = (row) => {
@@ -156,12 +158,12 @@ const GameBoard = () => {
     };
 
     return (
-        <>
+        <div className="container">
             <h1>Tic Tac Toe</h1>
             <Menu resetGame={resetGame}/>
             {createBoardJSX()}
-            <p>Winner is: {winner}</p>
-        </>
+            <h2>Winner is: {winner}</h2>
+        </div>
     )
 };
 
